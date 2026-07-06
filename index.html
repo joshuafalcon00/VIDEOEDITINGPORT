@@ -37,6 +37,11 @@ nav{
 .nav-links{display:flex;gap:2rem;list-style:none}
 .nav-links a{color:var(--muted2);text-decoration:none;font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;transition:color 0.2s}
 .nav-links a:hover{color:var(--blue)}
+.nav-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;z-index:1001}
+.nav-toggle span{width:22px;height:2px;background:var(--blue);border-radius:2px;transition:transform .25s,opacity .25s}
+.nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-toggle.open span:nth-child(2){opacity:0}
+.nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
 /* HERO */
 #hero{
@@ -314,7 +319,16 @@ footer{
 /* RESPONSIVE */
 @media(max-width:900px){
   nav{padding:0.8rem 1.5rem}
-  .nav-links{display:none}
+  .nav-toggle{display:flex}
+  .nav-links{
+    position:absolute;top:100%;left:0;right:0;
+    flex-direction:column;gap:0;
+    background:rgba(0,0,0,0.97);backdrop-filter:blur(16px);
+    border-bottom:1px solid var(--border);
+    padding:0.4rem 1.5rem 1rem;display:none;
+  }
+  .nav-links.open{display:flex}
+  .nav-links li{padding:0.55rem 0}
   #hero{grid-template-columns:1fr;padding:4.5rem 1.5rem 2.5rem;gap:2rem}
   .hero-left{align-items:center;text-align:center}
   .hero-desc{text-align:center}
@@ -345,9 +359,13 @@ footer{
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#portfolio">Work</a></li>
+    <li><a href="#ai-videos">AI</a></li>
     <li><a href="#services">Services</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
+  <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" onclick="toggleMenu(this)">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <!-- HERO -->
@@ -447,6 +465,8 @@ footer{
           <span class="stag">Transitions</span>
           <span class="stag">Captions</span>
           <span class="stag">Educational Video</span>
+          <span class="stag">Higgsfield</span>
+          <span class="stag">AI Video</span>
         </div>
       </div>
     </div>
@@ -497,24 +517,6 @@ footer{
     </div>
 
     <div class="pcard-item reveal" style="transition-delay:0.08s">
-      <div class="pthumb" data-id="1o9B69GmMGzyh81Gqd_OFahgeFLKzRWmK">
-        <img class="pthumb-img" src="https://drive.google.com/thumbnail?id=1o9B69GmMGzyh81Gqd_OFahgeFLKzRWmK&amp;sz=w800" alt="Video preview" loading="lazy"/>
-        <div class="play-overlay" onclick="playVideo(this)">
-          <div class="play-btn">&#9654;</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="pcard-item reveal" style="transition-delay:0.16s">
-      <div class="pthumb" data-id="1MeKqaeba35LspgWcZ6TI3lfY7yF2X9Dn">
-        <img class="pthumb-img" src="https://drive.google.com/thumbnail?id=1MeKqaeba35LspgWcZ6TI3lfY7yF2X9Dn&amp;sz=w800" alt="Video preview" loading="lazy"/>
-        <div class="play-overlay" onclick="playVideo(this)">
-          <div class="play-btn">&#9654;</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="pcard-item reveal" style="transition-delay:0.24s">
       <div class="pthumb" data-id="1136QtsG8mjX09__vxfmvN6XqlQQgypZd">
         <img class="pthumb-img" src="https://drive.google.com/thumbnail?id=1136QtsG8mjX09__vxfmvN6XqlQQgypZd&amp;sz=w800" alt="Video preview" loading="lazy"/>
         <div class="play-overlay" onclick="playVideo(this)">
@@ -523,9 +525,27 @@ footer{
       </div>
     </div>
 
+    <div class="pcard-item reveal" style="transition-delay:0.16s">
+      <div class="pthumb" data-id="1o9B69GmMGzyh81Gqd_OFahgeFLKzRWmK">
+        <img class="pthumb-img" src="https://drive.google.com/thumbnail?id=1o9B69GmMGzyh81Gqd_OFahgeFLKzRWmK&amp;sz=w800" alt="Video preview" loading="lazy"/>
+        <div class="play-overlay" onclick="playVideo(this)">
+          <div class="play-btn">&#9654;</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard-item reveal" style="transition-delay:0.24s">
+      <div class="pthumb" data-id="1GAvSCersOMi5i5gfSVE0WSUI_NCsWZnI">
+        <img class="pthumb-img" src="https://drive.google.com/thumbnail?id=1GAvSCersOMi5i5gfSVE0WSUI_NCsWZnI&amp;sz=w800" alt="Video preview" loading="lazy"/>
+        <div class="play-overlay" onclick="playVideo(this)">
+          <div class="play-btn">&#9654;</div>
+        </div>
+      </div>
+    </div>
+
     <div class="pcard-item reveal" style="transition-delay:0.32s">
-      <div class="pthumb" data-id="1hTXStoy1BqXELq2evII_-EWOpN73kpEa">
-        <img class="pthumb-img" src="https://drive.google.com/thumbnail?id=1hTXStoy1BqXELq2evII_-EWOpN73kpEa&amp;sz=w800" alt="Video preview" loading="lazy"/>
+      <div class="pthumb" data-id="1MeKqaeba35LspgWcZ6TI3lfY7yF2X9Dn">
+        <img class="pthumb-img" src="https://drive.google.com/thumbnail?id=1MeKqaeba35LspgWcZ6TI3lfY7yF2X9Dn&amp;sz=w800" alt="Video preview" loading="lazy"/>
         <div class="play-overlay" onclick="playVideo(this)">
           <div class="play-btn">&#9654;</div>
         </div>
@@ -542,6 +562,45 @@ footer{
     </div>
 
     <!-- ADD MORE VIDEOS HERE — copy one pcard-item block above and update the file ID -->
+
+  </div>
+</section>
+
+<!-- AI VIDEOS -->
+<section id="ai-videos" style="background:var(--bg)">
+  <div class="blob p-blob" style="top:-130px;right:-130px;left:auto"></div>
+  <div class="pf-header reveal">
+    <p class="eyebrow"><span class="eline"></span>Generative Work</p>
+    <h2 class="stitle" style="margin-bottom:0">AI <span class="accent">Videos</span></h2>
+  </div>
+  <div class="pgrid">
+
+    <div class="pcard-item reveal" style="transition-delay:0s">
+      <div class="pthumb" data-id="1uxVM6LszXe0kVreNyBIyPQQ4hOW_I0pC">
+        <img class="pthumb-img" src="https://drive.google.com/thumbnail?id=1uxVM6LszXe0kVreNyBIyPQQ4hOW_I0pC&amp;sz=w800" alt="AI video preview" loading="lazy"/>
+        <div class="play-overlay" onclick="playVideo(this)">
+          <div class="play-btn">&#9654;</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard-item reveal" style="transition-delay:0.08s">
+      <div class="pthumb" data-id="1eCZ9zVhPt3gDuzDixbpsenTqR7Uy-m1u">
+        <img class="pthumb-img" src="https://drive.google.com/thumbnail?id=1eCZ9zVhPt3gDuzDixbpsenTqR7Uy-m1u&amp;sz=w800" alt="AI video preview" loading="lazy"/>
+        <div class="play-overlay" onclick="playVideo(this)">
+          <div class="play-btn">&#9654;</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard-item reveal" style="transition-delay:0.16s">
+      <div class="pthumb" data-id="1GDh57IjfzK4ak32lGFvCYtv_O45YoIIT">
+        <img class="pthumb-img" src="https://drive.google.com/thumbnail?id=1GDh57IjfzK4ak32lGFvCYtv_O45YoIIT&amp;sz=w800" alt="AI video preview" loading="lazy"/>
+        <div class="play-overlay" onclick="playVideo(this)">
+          <div class="play-btn">&#9654;</div>
+        </div>
+      </div>
+    </div>
 
   </div>
 </section>
@@ -580,9 +639,9 @@ footer{
       <p class="sdesc">Instructional content edited for clarity and retention, supporting e-learning and academic delivery with professional polish.</p>
     </div>
     <div class="scard reveal">
-      <div class="sicon">&#127916;</div>
-      <div class="sname">Color Grading</div>
-      <p class="sdesc">Mood-first color work that gives footage a signature look. From cinematic dark tones to clean, bright commercial aesthetics.</p>
+      <div class="sicon">&#10024;</div>
+      <div class="sname">AI Video Generation</div>
+      <p class="sdesc">AI-generated and AI-assisted video using tools like Higgsfield. I don't own these AI platforms, but I'm trained to operate them and direct them toward polished, on-brand results.</p>
     </div>
     <div class="scard reveal">
       <div class="sicon">&#9999;&#65039;</div>
@@ -598,6 +657,7 @@ footer{
   <div class="ct-ring-d" style="width:380px;height:380px"></div>
   <div class="ct-ring-d" style="width:560px;height:560px"></div>
   <div class="ct-inner">
+    <h2 class="stitle reveal" style="margin-bottom:1.2rem">Contact <span class="accent">Info</span></h2>
     <div class="avail-strip reveal">
       <div class="avail-strip-dot"></div>
       Currently available for new projects
@@ -613,9 +673,8 @@ footer{
       <span>+63 916 679 7863</span>
       <span style="color:var(--muted)">&middot;</span>
       <span>General Santos City, PH</span>
-    </div>
-    <div style="margin-top:1.8rem" class="reveal">
-      <a href="mailto:Joshuafalcon00@gmail.com" class="btn-p">Send a Message</a>
+      <span style="color:var(--muted)">&middot;</span>
+      <a href="https://www.linkedin.com/in/falcon-joshua-355514417/" target="_blank" rel="noopener" style="color:var(--blue2);text-decoration:none">LinkedIn</a>
     </div>
   </div>
 </section>
@@ -628,6 +687,20 @@ footer{
 </footer>
 
 <script>
+  function toggleMenu(btn) {
+    var links = document.querySelector('.nav-links');
+    var open = links.classList.toggle('open');
+    btn.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', open);
+  }
+
+  function closeMenu() {
+    var links = document.querySelector('.nav-links');
+    var btn = document.querySelector('.nav-toggle');
+    if (links) links.classList.remove('open');
+    if (btn) { btn.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); }
+  }
+
   function playVideo(overlay) {
     var thumb = overlay.parentElement;
     var fileId = thumb.getAttribute('data-id');
@@ -653,7 +726,12 @@ footer{
       observer.observe(el);
     });
   }
-  document.addEventListener('DOMContentLoaded', observeReveal);
+  document.addEventListener('DOMContentLoaded', function() {
+    observeReveal();
+    document.querySelectorAll('.nav-links a').forEach(function(a) {
+      a.addEventListener('click', closeMenu);
+    });
+  });
 </script>
 </body>
 </html>
